@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.json({ status: 'Alive', service: 'Auctionary API' });
+    res.json({ status: 'Alive' });
 });
 
 require('./app/routes/user.server.routes')(app);

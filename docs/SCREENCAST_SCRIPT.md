@@ -1,6 +1,13 @@
 # Five-Minute Screencast Script
 
-Use a desktop browser at approximately 1440 by 900 pixels. Close unrelated tabs and notifications. Prepare two accounts before recording.
+Use a desktop browser at approximately 1440 by 900 pixels. Close unrelated tabs and notifications.
+
+Before recording, start the backend and run `npm run seed`. Use these prepared accounts:
+
+```text
+Seller: maya.demo@nocturne.co.uk / VinylDemo9!
+Bidder: ethan.demo@nocturne.co.uk / VinylDemo8!
+```
 
 ## 0:00-0:20 - Introduction
 
@@ -10,7 +17,7 @@ Use a desktop browser at approximately 1440 by 900 pixels. Close unrelated tabs 
 ## 0:20-0:50 - Authentication
 
 - Open **Register** and point out the password requirements.
-- Open **Log in** and sign in as Maya Turner.
+- Open **Log in** and sign in as Maya Turner using the seller demo account.
 - Point out the account menu, profile link and authenticated navigation.
 
 ## 0:50-1:25 - Search and categories
@@ -24,7 +31,7 @@ Use a desktop browser at approximately 1440 by 900 pixels. Close unrelated tabs 
 
 - Open a lot.
 - Explain the current bid, seller, deadline, question thread and bid history.
-- Log in as Ethan Brooks if needed.
+- Log in as Ethan Brooks using the bidder demo account if needed.
 - Place a bid greater than the current bid.
 - Show the updated bid, leading bidder and bid-history entry.
 - Briefly show that a seller cannot bid on their own item.

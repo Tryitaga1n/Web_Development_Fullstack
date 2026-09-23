@@ -25,7 +25,21 @@ npm run dev
 
 The API runs at `http://localhost:3333`.
 
-The SQLite database and tables are created automatically. To reset the database before running the official tests:
+The SQLite database and tables are created automatically. To create a polished vinyl-themed demonstration dataset for the frontend and screencast, keep the server running and execute this in a second terminal:
+
+```bash
+cd backend
+npm run seed
+```
+
+The seed command is safe to run more than once and creates two accounts:
+
+```text
+Seller: maya.demo@nocturne.co.uk / VinylDemo9!
+Bidder: ethan.demo@nocturne.co.uk / VinylDemo8!
+```
+
+To reset the database and run the official tests instead:
 
 ```bash
 npm run wipe
@@ -33,13 +47,6 @@ npm test
 ```
 
 Expected result: `128 passing`.
-
-The test scripts insert ten demonstration users and ten auction items. One useful login is:
-
-```text
-Email: maya.turner101@gmail.com
-Password: RiverStone9!
-```
 
 ## 2. Run the frontend
 
@@ -74,6 +81,7 @@ If the API runs somewhere else, copy `.env.example` to `.env` and change `VITE_A
 - Responsive, accessible Nocturne Vinyl branding
 - Registration and login
 - Search and category filtering
+- Clear local vinyl-themed demonstration data via `npm run seed`
 - Auction details, bid history, bidding and questions
 - Seller answer workflow
 - Auction creation with live preview

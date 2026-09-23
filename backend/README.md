@@ -7,11 +7,13 @@ Express and SQLite implementation of the official Auctionary OpenAPI specificati
 ```bash
 npm install
 npm run dev
+npm run seed
 npm run wipe
 npm test
 ```
 
 - `npm run dev` starts the API on port `3333`.
+- `npm run seed` creates a reusable vinyl-themed demonstration dataset for the frontend.
 - `npm run wipe` empties the test database and resets all auto-increment counters.
 - `npm test` runs the provided acceptance tests. The completed implementation passes all 128 tests.
 

@@ -15,7 +15,7 @@ fi
 rm -f "$OUTPUT"
 
 zip -r "$OUTPUT" \
-    backend frontend docs scripts screencast.mp4 README.md \
+    backend frontend screencast.mp4 \
     -x '*/node_modules/*' \
     -x '*/dist/*' \
     -x '*/.env' \

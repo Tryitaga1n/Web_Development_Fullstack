@@ -7,7 +7,8 @@
     "start": "node server.js",
     "wipe": "mocha ./tests/database.refresh.js --reporter spec --log-level=warn --timeout 10000",
     "test": "mocha ./tests/test.*.js --reporter spec --log-level=warn --timeout 10000",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "seed": "node app/scripts/seed-demo.js"
   },
   "repository": {
     "type": "git",

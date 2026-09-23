@@ -159,7 +159,7 @@ const getItems = async ({ q, status, userId, limit, offset, categoryId }) => {
     const rows = await db.all(
         `${summarySelect}
          ${whereClause}
-         ORDER BY i.item_id ASC
+         ORDER BY i.item_id DESC
          LIMIT ? OFFSET ?`,
         [...params, limit, offset]
     );
