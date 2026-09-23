@@ -1,0 +1,8 @@
+.DS_Store
+**/node_modules/
+**/dist/
+**/.env
+**/.env.*
+**/*.sqlite
+Auctionary-submission.zip
+screencast.mp4
