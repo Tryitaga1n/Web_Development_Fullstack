@@ -1,8 +1,12 @@
 const db = require('../lib/database');
 
 const summarySelect = `
-    SELECT i.item_id, i.name, i.description, i.end_date, i.creator_id,
-           u.first_name, u.last_name
+    SELECT i.item_id, i.name, i.description, i.starting_bid, i.end_date,
+           i.creator_id, u.first_name, u.last_name,
+           COALESCE(
+               (SELECT MAX(b.amount) FROM bids b WHERE b.item_id = i.item_id),
+               i.starting_bid
+           ) AS current_bid
     FROM items i
     JOIN users u ON u.user_id = i.creator_id
 `;
@@ -135,8 +139,9 @@ const getItems = async ({ q, status, userId, limit, offset, categoryId }) => {
     const params = [];
 
     if (q) {
-        where.push('LOWER(i.name) LIKE ?');
-        params.push(`%${q.toLowerCase()}%`);
+        const escapedQuery = q.toLowerCase().replace(/[!%_]/g, '!$&');
+        where.push("LOWER(i.name) LIKE ? ESCAPE '!'");
+        params.push(`%${escapedQuery}%`);
     }
 
     if (status === 'OPEN') {
