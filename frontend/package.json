@@ -1,6 +1,6 @@
 {
   "name": "nocturne-vinyl-auctionary",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -19,5 +19,15 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "vite": "^6.0.5"
-  }
+  },
+  "description": "Nocturne Vinyl frontend for the Full Stack Web Development Auctionary assignment",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tryitaga1n/Web_Development_Fullstack.git"
+  },
+  "author": "Tryitaga1n",
+  "bugs": {
+    "url": "https://github.com/Tryitaga1n/Web_Development_Fullstack/issues"
+  },
+  "homepage": "https://github.com/Tryitaga1n/Web_Development_Fullstack"
 }

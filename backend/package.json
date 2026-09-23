@@ -1,7 +1,7 @@
 {
-  "name": "auctionary_starter",
-  "version": "1.0.0",
-  "description": "The Auctionary API for the 26/27 Full Stack Web Development assignment",
+  "name": "auctionary-api",
+  "version": "1.1.0",
+  "description": "Full-stack Auctionary API for the 26/27 Full Stack Web Development assignment",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitcode.com/MMJISE/auctionary_starter.git"
+    "url": "git+https://github.com/Tryitaga1n/Web_Development_Fullstack.git"
   },
   "keywords": [
     "auctionary",
@@ -22,12 +22,12 @@
     "stack",
     "web"
   ],
-  "author": "Ash Williams, Xia Cui",
+  "author": "Tryitaga1n",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitcode.com/MMJISE/auctionary_starter/issues"
+    "url": "https://github.com/Tryitaga1n/Web_Development_Fullstack/issues"
   },
-  "homepage": "https://gitcode.com/MMJISE/auctionary_starter#readme",
+  "homepage": "https://github.com/Tryitaga1n/Web_Development_Fullstack#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
     "chai": "^4.3.8",
