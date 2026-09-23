@@ -12,7 +12,7 @@ const load = () => {
 };
 
 const remove = (draft) => {
-    if (!window.confirm(`Delete the draft "${draft.name || 'Untitled record'}"?`)) return;
+    if (!window.confirm(`Delete the draft "${draft.name || 'Untitled item'}"?`)) return;
     deleteDraft(draft.id);
     load();
     toast.push('Draft deleted.', 'info');
@@ -39,7 +39,7 @@ onMounted(load);
         <div v-if="!drafts.length" class="empty-state">
             <i class="bi bi-archive" aria-hidden="true"></i>
             <h2 class="h3 mt-3">No drafts waiting</h2>
-            <p class="text-secondary">Start a listing and save it before it is ready for the auction floor.</p>
+            <p class="text-secondary">Start a listing and save it before it is ready for the marketplace.</p>
             <RouterLink class="btn btn-dark" to="/create">Create a listing</RouterLink>
         </div>
 
@@ -49,7 +49,7 @@ onMounted(load);
                     <div class="d-flex justify-content-between align-items-start gap-3">
                         <div>
                             <span class="badge text-bg-light mb-3">Draft</span>
-                            <h2 class="h4">{{ draft.name || 'Untitled record' }}</h2>
+                            <h2 class="h4">{{ draft.name || 'Untitled item' }}</h2>
                         </div>
                         <span class="text-secondary small">Updated {{ new Date(draft.updatedAt).toLocaleDateString() }}</span>
                     </div>

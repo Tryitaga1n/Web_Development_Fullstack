@@ -41,7 +41,7 @@ onMounted(load);
 
 <template>
     <div v-if="loading" class="container py-5 text-center">
-        <div class="spinner-border text-warning" role="status"><span class="visually-hidden">Loading</span></div>
+        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading</span></div>
     </div>
 
     <section v-else-if="error" class="container py-5">
@@ -59,13 +59,13 @@ onMounted(load);
                 <div class="d-flex flex-column flex-md-row align-items-md-center gap-4">
                     <span class="profile-avatar">{{ initials }}</span>
                     <div class="flex-grow-1">
-                        <p class="eyebrow text-accent mb-2">Collector profile</p>
-                        <h1 class="display-5 fw-bold text-white mb-2">{{ profile.first_name }} {{ profile.last_name }}</h1>
-                        <p class="text-white-50 mb-0">Member #{{ profile.user_id }} in the Nocturne listening room.</p>
+                        <p class="eyebrow text-accent mb-2">Member profile</p>
+                        <h1 class="display-5 fw-bold mb-2">{{ profile.first_name }} {{ profile.last_name }}</h1>
+                        <p class="text-secondary mb-0">Member #{{ profile.user_id }} on Auctionary.</p>
                     </div>
                     <div v-if="isOwnProfile" class="d-flex flex-wrap gap-2">
                         <RouterLink class="btn btn-accent" to="/create"><i class="bi bi-plus-lg me-2"></i>New listing</RouterLink>
-                        <RouterLink class="btn btn-outline-light" to="/drafts"><i class="bi bi-archive me-2"></i>Drafts</RouterLink>
+                        <RouterLink class="btn btn-outline-dark" to="/drafts"><i class="bi bi-archive me-2"></i>Drafts</RouterLink>
                     </div>
                 </div>
             </div>
@@ -95,11 +95,11 @@ onMounted(load);
 
             <div class="profile-section mb-5">
                 <div class="section-heading mb-4">
-                    <p class="eyebrow text-accent mb-2">On the block</p>
+                    <p class="eyebrow text-accent mb-2">Listings</p>
                     <h2 class="h2 mb-0">{{ isOwnProfile ? 'Your listings' : 'Open listings' }}</h2>
                 </div>
                 <div v-if="!profile.selling.length" class="empty-state empty-state-small">
-                    <i class="bi bi-vinyl" aria-hidden="true"></i>
+                    <i class="bi bi-box-seam" aria-hidden="true"></i>
                     <p class="text-secondary mb-0 mt-3">No open auctions right now.</p>
                 </div>
                 <div v-else class="row g-4">
@@ -111,7 +111,7 @@ onMounted(load);
 
             <div class="profile-section mb-5">
                 <div class="section-heading mb-4">
-                    <p class="eyebrow text-accent mb-2">Chasing a grail</p>
+                    <p class="eyebrow text-accent mb-2">Your activity</p>
                     <h2 class="h2 mb-0">{{ isOwnProfile ? 'Auctions you are bidding on' : 'Active bids' }}</h2>
                 </div>
                 <div v-if="!profile.bidding_on.length" class="empty-state empty-state-small">
@@ -127,7 +127,7 @@ onMounted(load);
 
             <div class="profile-section">
                 <div class="section-heading mb-4">
-                    <p class="eyebrow text-accent mb-2">The archive</p>
+                    <p class="eyebrow text-accent mb-2">History</p>
                     <h2 class="h2 mb-0">Completed auctions</h2>
                 </div>
                 <div v-if="!profile.auctions_ended.length" class="empty-state empty-state-small">

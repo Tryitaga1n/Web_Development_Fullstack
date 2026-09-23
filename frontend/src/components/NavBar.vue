@@ -43,12 +43,12 @@ onUnmounted(() => {
 
 <template>
     <header class="site-header sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-dark container py-3" aria-label="Main navigation">
+        <nav class="navbar navbar-expand-lg navbar-light container py-3" aria-label="Main navigation">
             <RouterLink class="navbar-brand brand-lockup" to="/" @click="closeMenu">
-                <span class="brand-mark" aria-hidden="true"><i class="bi bi-vinyl-fill"></i></span>
+                <span class="brand-mark" aria-hidden="true"><i class="bi bi-box-seam"></i></span>
                 <span>
-                    <strong>Nocturne</strong>
-                    <small>VINYL AUCTIONS</small>
+                    <strong>Auctionary</strong>
+                    <small>ONLINE AUCTIONS</small>
                 </span>
             </RouterLink>
 
@@ -72,13 +72,13 @@ onUnmounted(() => {
                         <RouterLink class="nav-link" :class="{ active: route.name === 'search' }" to="/search" @click="closeMenu">Browse</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink class="nav-link" :class="{ active: route.name === 'create-item' }" to="/create" @click="closeMenu">Sell a record</RouterLink>
+                        <RouterLink class="nav-link" :class="{ active: route.name === 'create-item' }" to="/create" @click="closeMenu">Sell an item</RouterLink>
                     </li>
                     <template v-if="auth.isAuthenticated">
                         <li class="nav-item">
                             <RouterLink class="nav-link position-relative" :class="{ active: route.name === 'drafts' }" to="/drafts" @click="closeMenu">
                                 Drafts
-                                <span v-if="draftCount" class="badge rounded-pill text-bg-warning ms-1">{{ draftCount }}</span>
+                                <span v-if="draftCount" class="badge rounded-pill text-bg-light ms-1">{{ draftCount }}</span>
                             </RouterLink>
                         </li>
                         <li class="nav-item dropdown">
@@ -96,7 +96,7 @@ onUnmounted(() => {
                     <template v-else>
                         <li class="nav-item"><RouterLink class="nav-link" to="/login" @click="closeMenu">Log in</RouterLink></li>
                         <li class="nav-item">
-                            <RouterLink class="btn btn-accent ms-lg-2" to="/register" @click="closeMenu">Join the club</RouterLink>
+                            <RouterLink class="btn btn-accent ms-lg-2" to="/register" @click="closeMenu">Create account</RouterLink>
                         </li>
                     </template>
                 </ul>

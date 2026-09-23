@@ -1,6 +1,6 @@
 {
   "name": "auctionary-api",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Full-stack Auctionary API for the 26/27 Full Stack Web Development assignment",
   "main": "server.js",
   "scripts": {

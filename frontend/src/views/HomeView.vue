@@ -21,7 +21,7 @@ const loadHome = async () => {
         items.value = itemResponse.data;
         categories.value = categoryResponse.data;
     } catch (err) {
-        error.value = apiErrorMessage(err, 'Unable to load the auction floor.');
+        error.value = apiErrorMessage(err, 'Unable to load the marketplace.');
     } finally {
         loading.value = false;
     }
@@ -34,28 +34,36 @@ onMounted(loadHome);
     <section class="hero-section">
         <div class="container position-relative">
             <div class="row align-items-center g-5 py-lg-5">
-                <div class="col-lg-7 text-white">
-                    <p class="eyebrow mb-3">Fine records. Serious listening.</p>
-                    <h1 class="display-3 fw-bold lh-1 mb-4">Auction house for the analog obsessed.</h1>
-                    <p class="lead text-white-50 mb-4 col-lg-10">
-                        Discover rare pressings, collectable box sets and carefully kept audio equipment from sellers who know the groove.
+                <div class="col-lg-7">
+                    <p class="eyebrow mb-3">Simple listings. Clear decisions.</p>
+                    <h1 class="display-3 fw-bold lh-1 mb-4">Auction anything. Bid with confidence.</h1>
+                    <p class="lead text-secondary mb-4 col-lg-10">
+                        Find useful, collectible and one-of-a-kind items from sellers you can question before you bid.
                     </p>
                     <div class="d-flex flex-wrap gap-3">
                         <RouterLink class="btn btn-accent btn-lg" to="/search">
                             <i class="bi bi-search me-2" aria-hidden="true"></i>Browse auctions
                         </RouterLink>
-                        <RouterLink class="btn btn-outline-light btn-lg" :to="auth.isAuthenticated ? '/create' : '/register'">
+                        <RouterLink class="btn btn-outline-dark btn-lg" :to="auth.isAuthenticated ? '/create' : '/register'">
                             Start selling
                         </RouterLink>
                     </div>
                 </div>
                 <div class="col-lg-5 d-none d-lg-block">
-                    <div class="hero-record-wrap" aria-hidden="true">
-                        <div class="hero-record">
-                            <div class="hero-record-label">
-                                <i class="bi bi-vinyl-fill"></i>
-                                <span>NOCTURNE</span>
-                            </div>
+                    <div class="hero-showcase" aria-hidden="true">
+                        <div class="showcase-card showcase-card-main">
+                            <div class="showcase-icon"><i class="bi bi-box-seam"></i></div>
+                            <span>Current listing</span>
+                            <strong>Canon AE-1 camera</strong>
+                            <div class="showcase-price">£145</div>
+                        </div>
+                        <div class="showcase-card showcase-card-time">
+                            <span>Ends in</span>
+                            <strong>02:14:36</strong>
+                        </div>
+                        <div class="showcase-card showcase-card-trust">
+                            <i class="bi bi-shield-check"></i>
+                            <span>Verified bids</span>
                         </div>
                     </div>
                 </div>
@@ -68,7 +76,7 @@ onMounted(loadHome);
             <div class="col-md-4">
                 <div class="feature-panel h-100">
                     <i class="bi bi-patch-check feature-icon" aria-hidden="true"></i>
-                    <h2 class="h5 mt-3">Clear lot details</h2>
+                    <h2 class="h5 mt-3">Clear item details</h2>
                     <p class="text-secondary mb-0">Seller, condition notes and current bids are visible before you commit.</p>
                 </div>
             </div>
@@ -76,7 +84,7 @@ onMounted(loadHome);
                 <div class="feature-panel h-100">
                     <i class="bi bi-people feature-icon" aria-hidden="true"></i>
                     <h2 class="h5 mt-3">Open questions</h2>
-                    <p class="text-secondary mb-0">Ask the seller directly, just like you would in a real record shop.</p>
+                    <p class="text-secondary mb-0">Ask sellers directly and get answers before committing to a bid.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -92,10 +100,10 @@ onMounted(loadHome);
     <section class="container pb-5">
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-end gap-3 mb-4">
             <div>
-                <p class="eyebrow text-accent mb-2">Browse by crate</p>
-                <h2 class="h1 mb-0">Find your next obsession</h2>
+                <p class="eyebrow text-accent mb-2">Browse by category</p>
+                <h2 class="h1 mb-0">Explore active listings</h2>
             </div>
-            <RouterLink class="btn btn-outline-dark" to="/search">View all lots <i class="bi bi-arrow-right ms-1"></i></RouterLink>
+            <RouterLink class="btn btn-outline-dark" to="/search">View all items <i class="bi bi-arrow-right ms-1"></i></RouterLink>
         </div>
         <div v-if="categories.length" class="d-flex flex-wrap gap-2">
             <RouterLink
@@ -130,9 +138,9 @@ onMounted(loadHome);
         <div v-else-if="error" class="alert alert-danger" role="alert">{{ error }}</div>
 
         <div v-else-if="!items.length" class="empty-state">
-            <i class="bi bi-vinyl" aria-hidden="true"></i>
-            <h3 class="h4 mt-3">The auction floor is quiet</h3>
-            <p class="text-secondary">No lots are listed yet. Be the first to create one.</p>
+            <i class="bi bi-box-seam" aria-hidden="true"></i>
+            <h3 class="h4 mt-3">There are no active listings</h3>
+            <p class="text-secondary">No items are listed yet. Be the first to create one.</p>
             <RouterLink class="btn btn-dark" :to="auth.isAuthenticated ? '/create' : '/login'">List an item</RouterLink>
         </div>
 

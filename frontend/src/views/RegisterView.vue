@@ -45,7 +45,7 @@ const submit = async () => {
             password: form.password
         });
         await auth.login({ email: form.email, password: form.password });
-        toast.push('Your Nocturne account is ready.', 'success');
+        toast.push('Your Auctionary account is ready.', 'success');
         router.push('/');
     } catch (err) {
         error.value = apiErrorMessage(err, 'Unable to create your account.');
@@ -64,8 +64,8 @@ const submit = async () => {
                         <div class="text-center mb-4">
                             <span class="auth-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
                             <p class="eyebrow text-accent mt-3 mb-2">Join the club</p>
-                            <h1 class="h2">Start your collection</h1>
-                            <p class="text-secondary">One account to buy, sell and keep track of every lot.</p>
+                            <h1 class="h2">Create your account</h1>
+                            <p class="text-secondary">One account to buy, sell and keep track of every auction.</p>
                         </div>
 
                         <div v-if="error" class="alert alert-danger" role="alert">{{ error }}</div>

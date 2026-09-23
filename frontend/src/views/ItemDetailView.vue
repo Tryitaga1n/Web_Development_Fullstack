@@ -125,8 +125,8 @@ onMounted(load);
 
 <template>
     <div v-if="loading" class="container py-5 text-center">
-        <div class="spinner-border text-warning" role="status"><span class="visually-hidden">Loading</span></div>
-        <p class="text-secondary mt-3">Opening the sleeve...</p>
+        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading</span></div>
+        <p class="text-secondary mt-3">Loading item details...</p>
     </div>
 
     <section v-else-if="error" class="container py-5">
@@ -151,11 +151,11 @@ onMounted(load);
 
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <div class="record-detail-visual" :class="`record-palette-${Number(item.item_id) % 5}`">
-                            <div class="record-sleeve">
-                                <span class="sleeve-kicker">NOCTURNE SELECTS</span>
-                                <i class="bi bi-vinyl-fill" aria-hidden="true"></i>
-                                <span class="sleeve-lot">LOT {{ String(item.item_id).padStart(3, '0') }}</span>
+                        <div class="item-detail-visual" :class="`detail-palette-${Number(item.item_id) % 5}`">
+                            <div class="detail-placeholder">
+                                <span class="detail-kicker">AUCTIONARY LISTING</span>
+                                <i class="bi bi-box-seam" aria-hidden="true"></i>
+                                <span class="detail-lot">ITEM {{ String(item.item_id).padStart(3, '0') }}</span>
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@ onMounted(load);
                         <div class="d-flex flex-wrap gap-2 mb-3">
                             <span v-for="category in item.categories" :key="category.category_id" class="badge text-bg-light">{{ category.name }}</span>
                         </div>
-                        <p class="eyebrow text-accent mb-2">Lot #{{ item.item_id }}</p>
+                        <p class="eyebrow text-accent mb-2">Item #{{ item.item_id }}</p>
                         <h1 class="display-5 fw-bold mb-3">{{ item.name }}</h1>
                         <p class="lead text-secondary">{{ item.description }}</p>
 
@@ -179,7 +179,7 @@ onMounted(load);
                             <div class="text-lg-end">
                                 <div class="small text-uppercase tracking-wide text-secondary">Auction ends</div>
                                 <div class="h5 mb-1">{{ formatDate(item.end_date) }}</div>
-                                <div class="badge text-bg-warning">{{ timeRemaining(item.end_date) }}</div>
+                                <div class="badge text-bg-light">{{ timeRemaining(item.end_date) }}</div>
                             </div>
                         </div>
 
@@ -253,7 +253,7 @@ onMounted(load);
                     <div v-if="auth.isAuthenticated && !isSeller && auctionOpen" class="question-composer mb-4">
                         <div v-if="questionError" class="alert alert-danger" role="alert">{{ questionError }}</div>
                         <label class="form-label" for="new-question">Ask the seller a question</label>
-                        <textarea id="new-question" v-model="questionText" class="form-control" rows="3" maxlength="1000" placeholder="Is the sleeve included? How does the record play?"></textarea>
+                        <textarea id="new-question" v-model="questionText" class="form-control" rows="3" maxlength="1000" placeholder="Are there any visible signs of wear? Are all original accessories included?"></textarea>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="small text-secondary">{{ questionText.length }}/1000</span>
                             <button class="btn btn-dark" type="button" :disabled="questionLoading" @click="askQuestion">
@@ -269,7 +269,7 @@ onMounted(load);
                     <div v-if="!questions.length" class="empty-state empty-state-small">
                         <i class="bi bi-chat-square-text" aria-hidden="true"></i>
                         <h3 class="h5 mt-3">No questions yet</h3>
-                        <p class="text-secondary mb-0">Be the first to ask about this lot.</p>
+                        <p class="text-secondary mb-0">Be the first to ask about this item.</p>
                     </div>
 
                     <div v-else class="question-list">

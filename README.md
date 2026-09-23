@@ -1,9 +1,9 @@
-# Nocturne Vinyl - Auctionary Full-Stack Assignment
+# Auctionary Full-Stack Assignment
 
 This repository contains the complete 2026/27 Full-Stack Web Development assignment:
 
 - `backend/`: Node.js, Express and SQLite implementation of the Auctionary API.
-- `frontend/`: Vue 3 single-page application branded as **Nocturne Vinyl**, a specialist record auction house.
+- `frontend/`: Vue 3 single-page application with a clean, minimal marketplace design.
 - `docs/`: submission checklist and a timed walkthrough for the required screencast.
 - `scripts/`: a safe packaging script that excludes dependencies, build output and runtime data.
 
@@ -25,7 +25,7 @@ npm run dev
 
 The API runs at `http://localhost:3333`.
 
-The SQLite database and tables are created automatically. To create a polished vinyl-themed demonstration dataset for the frontend and screencast, keep the server running and execute this in a second terminal:
+The SQLite database and tables are created automatically. To create a polished general-marketplace demonstration dataset for the frontend and screencast, keep the server running and execute this in a second terminal:
 
 ```bash
 cd backend
@@ -35,8 +35,8 @@ npm run seed
 The seed command is safe to run more than once and creates two accounts:
 
 ```text
-Seller: maya.demo@nocturne.co.uk / VinylDemo9!
-Bidder: ethan.demo@nocturne.co.uk / VinylDemo8!
+Seller: maya.demo@auctionary.co.uk / AuctionDemo9!
+Bidder: ethan.demo@auctionary.co.uk / AuctionDemo8!
 ```
 
 To reset the database and run the official tests instead:
@@ -78,10 +78,10 @@ If the API runs somewhere else, copy `.env.example` to `.env` and change `VITE_A
 
 ### Front-end
 
-- Responsive, accessible Nocturne Vinyl branding
+- Responsive, accessible minimal Auctionary branding
 - Registration and login
 - Search and category filtering
-- Clear local vinyl-themed demonstration data via `npm run seed`
+- Clear local demonstration data via `npm run seed`
 - Auction details, bid history, bidding and questions
 - Seller answer workflow
 - Auction creation with live preview

@@ -46,7 +46,7 @@ const search = async (targetPage = 0) => {
         });
     } catch (err) {
         items.value = [];
-        error.value = apiErrorMessage(err, 'Unable to search the auction floor.');
+        error.value = apiErrorMessage(err, 'Unable to search the marketplace.');
     } finally {
         loading.value = false;
     }
@@ -68,9 +68,9 @@ onMounted(async () => {
 <template>
     <section class="page-hero compact-hero">
         <div class="container py-5">
-            <p class="eyebrow text-accent mb-2">The auction floor</p>
-            <h1 class="display-5 fw-bold text-white mb-2">Browse every lot</h1>
-            <p class="text-white-50 mb-0">Search by title, category or the auctions connected to your account.</p>
+            <p class="eyebrow text-accent mb-2">The marketplace</p>
+            <h1 class="display-5 fw-bold mb-2">Browse every item</h1>
+            <p class="text-secondary mb-0">Search by title, category or the auctions connected to your account.</p>
         </div>
     </section>
 
@@ -81,7 +81,7 @@ onMounted(async () => {
                     <label class="form-label" for="search-q">Search titles</label>
                     <div class="input-group">
                         <span class="input-group-text bg-white"><i class="bi bi-search" aria-hidden="true"></i></span>
-                        <input id="search-q" v-model.trim="filters.q" class="form-control" placeholder="Artist, pressing, equipment..." />
+                        <input id="search-q" v-model.trim="filters.q" class="form-control" placeholder="Camera, furniture, watch..." />
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-2">
@@ -113,19 +113,19 @@ onMounted(async () => {
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h3 mb-0">{{ page === 0 ? 'Search results' : `Results - page ${page + 1}` }}</h2>
-            <span class="text-secondary small">{{ items.length }} lot{{ items.length === 1 ? '' : 's' }} shown</span>
+            <span class="text-secondary small">{{ items.length }} item{{ items.length === 1 ? '' : 's' }} shown</span>
         </div>
 
         <div v-if="loading" class="text-center py-5" aria-live="polite">
-            <div class="spinner-border text-warning" role="status"><span class="visually-hidden">Loading</span></div>
-            <p class="text-secondary mt-3 mb-0">Searching the crates...</p>
+            <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading</span></div>
+            <p class="text-secondary mt-3 mb-0">Searching listings...</p>
         </div>
 
         <div v-else-if="error" class="alert alert-danger" role="alert">{{ error }}</div>
 
         <div v-else-if="!items.length" class="empty-state">
             <i class="bi bi-search" aria-hidden="true"></i>
-            <h3 class="h4 mt-3">No records found</h3>
+            <h3 class="h4 mt-3">No items found</h3>
             <p class="text-secondary">Try a broader title, another category, or clear the filters.</p>
             <button class="btn btn-outline-dark" type="button" @click="Object.assign(filters, { q: '', status: '', category_id: '' }); search(0)">Clear filters</button>
         </div>

@@ -72,13 +72,29 @@ db.serialize(() => {
         FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
     )`);
 
-    const categories = [
+    // Remove categories created by the previous vinyl demo theme when upgrading an existing database.
+    const legacyCategories = [
         'Vinyl Records',
         'Turntables',
         'Audio Equipment',
         'Accessories',
-        'Collectibles',
         'Box Sets'
+    ];
+
+    if (legacyCategories.length) {
+        const placeholders = legacyCategories.map(() => '?').join(',');
+        db.run(`DELETE FROM categories WHERE name IN (${placeholders})`, legacyCategories);
+    }
+
+    const categories = [
+        'Electronics',
+        'Cameras & Audio',
+        'Home & Living',
+        'Fashion & Accessories',
+        'Sports & Outdoors',
+        'Collectibles',
+        'Books & Media',
+        'Other'
     ];
 
     db.run('CREATE INDEX IF NOT EXISTS idx_items_creator ON items (creator_id)');

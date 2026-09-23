@@ -118,7 +118,7 @@ onMounted(async () => {
             <div class="row align-items-end g-3">
                 <div class="col-lg-8">
                     <p class="eyebrow text-accent mb-2">Seller studio</p>
-                    <h1 class="display-5 fw-bold text-white mb-2">{{ isEditingDraft ? 'Edit your draft' : 'List a new lot' }}</h1>
+                    <h1 class="display-5 fw-bold text-white mb-2">{{ isEditingDraft ? 'Edit your draft' : 'List a new item' }}</h1>
                     <p class="text-white-50 mb-0">Write the story, set the opening bid and choose when the needle drops.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
@@ -145,11 +145,11 @@ onMounted(async () => {
                             <p class="text-secondary mb-4">Keep the title specific and the description honest.</p>
                             <div class="mb-3">
                                 <label class="form-label" for="item-name">Auction title</label>
-                                <input id="item-name" v-model="form.name" class="form-control form-control-lg" maxlength="120" placeholder="e.g. Fleetwood Mac - Rumours, 1977 first pressing" />
+                                <input id="item-name" v-model="form.name" class="form-control form-control-lg" maxlength="120" placeholder="e.g. Canon AE-1 camera with 50mm lens" />
                             </div>
                             <div>
                                 <label class="form-label" for="item-description">Description</label>
-                                <textarea id="item-description" v-model="form.description" class="form-control" rows="6" maxlength="2000" placeholder="Condition, pressing details, sleeve notes, included extras..."></textarea>
+                                <textarea id="item-description" v-model="form.description" class="form-control" rows="6" maxlength="2000" placeholder="Condition, age, dimensions and any included accessories..."></textarea>
                                 <div class="form-text text-end">{{ form.description.length }}/2000</div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@ onMounted(async () => {
                         <span class="step-number">02</span>
                         <div class="flex-grow-1">
                             <h2 class="h4 mb-1">Bid and deadline</h2>
-                            <p class="text-secondary mb-4">Set a fair starting point and allow enough time for collectors to find it.</p>
+                            <p class="text-secondary mb-4">Set a fair starting point and allow enough time for buyers to find it.</p>
                             <div class="row g-4">
                                 <div class="col-md-5">
                                     <label class="form-label" for="starting-bid">Starting bid (GBP)</label>
@@ -180,7 +180,7 @@ onMounted(async () => {
                         <span class="step-number">03</span>
                         <div class="flex-grow-1">
                             <h2 class="h4 mb-1">Browse categories</h2>
-                            <p class="text-secondary mb-4">Choose up to six categories to help the right collectors find your lot.</p>
+                            <p class="text-secondary mb-4">Choose categories to help the right buyers find your listing.</p>
                             <div v-if="loadingCategories" class="text-secondary">Loading categories...</div>
                             <div v-else class="category-grid">
                                 <label v-for="category in categories" :key="category.category_id" class="category-choice">
@@ -206,9 +206,9 @@ onMounted(async () => {
             <aside class="col-lg-4">
                 <div class="preview-card sticky-lg-top">
                     <p class="eyebrow text-accent mb-2">Live preview</p>
-                    <h2 class="h3">{{ form.name || 'Untitled record' }}</h2>
-                    <div class="preview-record my-4">
-                        <i class="bi bi-vinyl-fill" aria-hidden="true"></i>
+                    <h2 class="h3">{{ form.name || 'Untitled item' }}</h2>
+                    <div class="preview-visual my-4">
+                        <i class="bi bi-box-seam" aria-hidden="true"></i>
                     </div>
                     <p class="text-secondary">{{ form.description || 'Your description will appear here.' }}</p>
                     <div class="d-flex justify-content-between border-top pt-3 mt-4">

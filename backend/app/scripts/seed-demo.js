@@ -3,80 +3,80 @@ const API_URL = (process.env.API_URL || 'http://127.0.0.1:3333').replace(/\/$/, 
 const seller = {
     first_name: 'Maya',
     last_name: 'Turner',
-    email: 'maya.demo@nocturne.co.uk',
-    password: 'VinylDemo9!'
+    email: 'maya.demo@auctionary.co.uk',
+    password: 'AuctionDemo9!'
 };
 
 const buyer = {
     first_name: 'Ethan',
     last_name: 'Brooks',
-    email: 'ethan.demo@nocturne.co.uk',
-    password: 'VinylDemo8!'
+    email: 'ethan.demo@auctionary.co.uk',
+    password: 'AuctionDemo8!'
 };
 
 const items = [
     {
-        name: 'Miles Davis - Kind of Blue, 1959 mono pressing',
-        description: 'A clean six-eye Columbia mono pressing with deep, warm sound. Sleeve shows light shelf wear; vinyl has been play-tested throughout.',
-        starting_bid: 185,
-        days: 6,
-        categories: ['Vinyl Records', 'Collectibles'],
-        bid: 210
-    },
-    {
-        name: 'Fleetwood Mac - Rumours, 1977 US pressing',
-        description: 'Classic Warner Bros. pressing with the original inner sleeve. Both record and jacket remain in excellent condition.',
-        starting_bid: 48,
-        days: 4,
-        categories: ['Vinyl Records'],
-        bid: 61
-    },
-    {
-        name: 'The Beatles - Abbey Road, 1969 Apple pressing',
-        description: 'Original UK-style Apple label pressing. Strong gloss, clean labels and no jumps or skips during play.',
+        name: 'Canon AE-1 35mm camera kit',
+        description: 'Working film camera with a 50mm lens, strap, protective case and a freshly installed battery.',
         starting_bid: 120,
-        days: 8,
-        categories: ['Vinyl Records', 'Collectibles'],
+        days: 6,
+        categories: ['Cameras & Audio', 'Electronics'],
         bid: 145
     },
     {
-        name: 'Pink Floyd - The Dark Side of the Moon, Harvest pressing',
-        description: 'Complete copy with both posters and stickers. The iconic gatefold sleeve is crisp with only minor corner wear.',
-        starting_bid: 160,
-        days: 7,
-        categories: ['Vinyl Records', 'Box Sets'],
-        bid: 190
+        name: 'Keychron Q1 mechanical keyboard',
+        description: 'Solid aluminium keyboard with tactile switches, detachable cable and original packaging.',
+        starting_bid: 80,
+        days: 4,
+        categories: ['Electronics'],
+        bid: 96
     },
     {
-        name: 'Joni Mitchell - Blue, early UK pressing',
-        description: 'A beautifully preserved copy of Joni Mitchell at her finest. Includes the original textured inner sleeve.',
-        starting_bid: 58,
+        name: 'Mid-century oak coffee table',
+        description: 'Well-kept solid oak table with tapered legs and a useful lower shelf. Minor surface marks are shown in the photos.',
+        starting_bid: 150,
+        days: 8,
+        categories: ['Home & Living'],
+        bid: 180
+    },
+    {
+        name: 'Leather weekender travel bag',
+        description: 'Full-grain leather holdall with cotton lining, detachable shoulder strap and brass hardware.',
+        starting_bid: 65,
         days: 5,
-        categories: ['Vinyl Records'],
-        bid: 72
+        categories: ['Fashion & Accessories'],
+        bid: 74
     },
     {
-        name: 'Pro-Ject Debut Carbon EVO turntable',
-        description: 'Barely used turntable in satin black with the factory Ortofon cartridge, dust cover and all original packaging.',
-        starting_bid: 295,
+        name: 'Specialized Allez road bike, 54cm',
+        description: 'Lightweight aluminium road bike with 18 gears, recently serviced brakes and new bar tape.',
+        starting_bid: 390,
         days: 9,
-        categories: ['Turntables', 'Audio Equipment'],
-        bid: 325
+        categories: ['Sports & Outdoors'],
+        bid: 420
     },
     {
-        name: 'Ortofon 2M Blue replacement stylus',
-        description: 'New-old-stock stylus in an unopened original box. Suitable for the 2M Blue cartridge and compatible bodies.',
-        starting_bid: 95,
-        days: 3,
-        categories: ['Audio Equipment', 'Accessories'],
+        name: 'Vintage Seiko automatic watch',
+        description: 'Serviced automatic watch with a clean dial, stainless-steel case and new leather strap.',
+        starting_bid: 210,
+        days: 7,
+        categories: ['Fashion & Accessories', 'Collectibles'],
         bid: null
     },
     {
-        name: 'Blue Note collector box set and liner notes',
-        description: 'A handsome collector box containing three jazz reissues plus the original illustrated liner-note booklet.',
-        starting_bid: 135,
+        name: 'Pair of KEF bookshelf speakers',
+        description: 'Compact passive speakers in excellent working order, supplied with removable grilles and speaker cable.',
+        starting_bid: 180,
+        days: 3,
+        categories: ['Cameras & Audio', 'Electronics'],
+        bid: null
+    },
+    {
+        name: 'Complete LEGO botanical display set',
+        description: 'Complete display model with all pieces, printed instructions and original box.',
+        starting_bid: 85,
         days: 10,
-        categories: ['Box Sets', 'Collectibles', 'Vinyl Records'],
+        categories: ['Collectibles', 'Home & Living'],
         bid: null
     }
 ];
@@ -172,7 +172,7 @@ const ensureBid = async (session, itemId, amount) => {
 };
 
 const ensureQuestion = async (sellerSession, buyerSession, itemId) => {
-    const questionText = 'Could you confirm how the record plays from start to finish?';
+    const questionText = 'Could you confirm the condition and any signs of wear?';
     const existing = await request(`/item/${itemId}/question`);
     const match = existing.find((question) => question.question_text === questionText);
 
@@ -191,7 +191,7 @@ const ensureQuestion = async (sellerSession, buyerSession, itemId) => {
         method: 'POST',
         headers: authHeaders(sellerSession),
         body: JSON.stringify({
-            answer_text: 'Yes, it has been played through and there are no jumps, repeats or distracting surface issues.'
+            answer_text: 'It is in very good condition for its age. Any visible marks are described in the listing.'
         })
     });
 };
@@ -210,7 +210,7 @@ const seed = async () => {
     const firstItem = await findItem(items[0].name);
     if (firstItem) await ensureQuestion(sellerSession, buyerSession, firstItem.item_id);
 
-    console.log('Nocturne Vinyl demo data is ready.');
+    console.log('Auctionary demo data is ready.');
     console.log(`Seller: ${seller.email} / ${seller.password}`);
     console.log(`Bidder: ${buyer.email} / ${buyer.password}`);
 };

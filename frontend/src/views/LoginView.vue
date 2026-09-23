@@ -27,7 +27,7 @@ const submit = async () => {
     loading.value = true;
     try {
         await auth.login(form);
-        toast.push('Welcome back to Nocturne.', 'success');
+        toast.push('Welcome back to Auctionary.', 'success');
         router.push(route.query.redirect || '/');
     } catch (err) {
         error.value = apiErrorMessage(err, 'Unable to log in with those details.');
@@ -46,7 +46,7 @@ const submit = async () => {
                         <div class="text-center mb-4">
                             <span class="auth-icon"><i class="bi bi-person-lock" aria-hidden="true"></i></span>
                             <p class="eyebrow text-accent mt-3 mb-2">Member access</p>
-                            <h1 class="h2">Back to the listening room</h1>
+                            <h1 class="h2">Welcome back</h1>
                             <p class="text-secondary">Log in to bid, sell and manage your auctions.</p>
                         </div>
 

@@ -12,7 +12,7 @@
 - [ ] Stop both development servers.
 - [ ] Run `cd backend && npm run wipe && npm test` and confirm all 128 tests pass.
 - [ ] Run `cd frontend && npm run build` and confirm the production build succeeds.
-- [ ] Start the backend, run `npm run seed`, and confirm the vinyl demo data appears in the frontend.
+- [ ] Start the backend, run `npm run seed`, and confirm the general marketplace demo data appears in the frontend.
 - [ ] Record the screencast using `docs/SCREENCAST_SCRIPT.md`.
 - [ ] Save the final video as `Auctionary/screencast.mp4`.
 - [ ] Check that the video is playable and under the Moodle upload limit.

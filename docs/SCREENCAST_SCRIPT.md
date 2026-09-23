@@ -5,14 +5,14 @@ Use a desktop browser at approximately 1440 by 900 pixels. Close unrelated tabs 
 Before recording, start the backend and run `npm run seed`. Use these prepared accounts:
 
 ```text
-Seller: maya.demo@nocturne.co.uk / VinylDemo9!
-Bidder: ethan.demo@nocturne.co.uk / VinylDemo8!
+Seller: maya.demo@auctionary.co.uk / AuctionDemo9!
+Bidder: ethan.demo@auctionary.co.uk / AuctionDemo8!
 ```
 
 ## 0:00-0:20 - Introduction
 
-- Show the Nocturne Vinyl home page.
-- Explain: "This is Auctionary, a full-stack auction prototype built with Express, SQLite and Vue 3. I have branded the white-label application as Nocturne Vinyl, a specialist record auction house."
+- Show the Auctionary home page.
+- Explain: "This is Auctionary, a full-stack auction prototype built with Express, SQLite and Vue 3. I have styled the white-label application as a clean, general-purpose auction marketplace."
 
 ## 0:20-0:50 - Authentication
 
@@ -24,12 +24,12 @@ Bidder: ethan.demo@nocturne.co.uk / VinylDemo8!
 
 - Open **Browse**.
 - Search for `and` and explain the title search.
-- Select **Vinyl Records** to demonstrate the multi-category extension.
+- Select **Cameras & Audio** to demonstrate the multi-category extension.
 - Show pagination controls and the responsive card layout.
 
 ## 1:25-2:05 - Auction details and bidding
 
-- Open a lot.
+- Open an item.
 - Explain the current bid, seller, deadline, question thread and bid history.
 - Log in as Ethan Brooks using the bidder demo account if needed.
 - Place a bid greater than the current bid.
@@ -46,7 +46,7 @@ Bidder: ethan.demo@nocturne.co.uk / VinylDemo8!
 
 ## 2:40-3:50 - Create an auction and local drafts
 
-- Open **Sell a record**.
+- Open **Sell an item**.
 - Enter a title, description, starting bid and future closing date.
 - Select multiple categories.
 - Click **Save as draft** and show the local-saved confirmation.
