@@ -53,7 +53,7 @@ const addBid = asyncHandler(async (req, res) => {
     }
 
     await core.addBid(itemId, req.user.user_id, value.amount);
-    return res.sendStatus(201);
+    return res.status(201).end();
 });
 
 const getBidHistory = asyncHandler(async (req, res) => {

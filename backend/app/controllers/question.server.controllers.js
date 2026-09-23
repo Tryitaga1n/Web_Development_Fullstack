@@ -19,7 +19,7 @@ const askQuestion = asyncHandler(async (req, res) => {
     }
 
     await core.askQuestion(itemId, req.user.user_id, value.question_text);
-    return res.sendStatus(200);
+    return res.status(200).end();
 });
 
 const answerQuestion = asyncHandler(async (req, res) => {
@@ -38,7 +38,7 @@ const answerQuestion = asyncHandler(async (req, res) => {
     }
 
     await core.answerQuestion(questionId, value.answer_text);
-    return res.sendStatus(200);
+    return res.status(200).end();
 });
 
 const getQuestions = asyncHandler(async (req, res) => {

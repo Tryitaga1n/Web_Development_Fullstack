@@ -43,7 +43,7 @@ const login = asyncHandler(async (req, res) => {
 
 const logout = asyncHandler(async (req, res) => {
     await users.clearSessionToken(req.user.user_id);
-    return res.sendStatus(200);
+    return res.status(200).end();
 });
 
 const getOne = asyncHandler(async (req, res) => {
