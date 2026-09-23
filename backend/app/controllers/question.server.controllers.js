@@ -18,8 +18,8 @@ const askQuestion = asyncHandler(async (req, res) => {
         return res.status(400).json({ error_message: 'Question contains prohibited language' });
     }
 
-    const result = await core.askQuestion(itemId, req.user.user_id, value.question_text);
-    return res.status(200).json({ question_id: result.lastID });
+    await core.askQuestion(itemId, req.user.user_id, value.question_text);
+    return res.sendStatus(200);
 });
 
 const answerQuestion = asyncHandler(async (req, res) => {

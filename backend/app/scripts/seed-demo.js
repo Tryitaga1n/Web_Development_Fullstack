@@ -178,13 +178,16 @@ const ensureQuestion = async (sellerSession, buyerSession, itemId) => {
 
     if (match) return;
 
-    const created = await request(`/item/${itemId}/question`, {
+    await request(`/item/${itemId}/question`, {
         method: 'POST',
         headers: authHeaders(buyerSession),
         body: JSON.stringify({ question_text: questionText })
     });
 
-    await request(`/question/${created.question_id}`, {
+    const updatedQuestions = await request(`/item/${itemId}/question`);
+    const createdQuestion = updatedQuestions.find((question) => question.question_text === questionText);
+
+    await request(`/question/${createdQuestion.question_id}`, {
         method: 'POST',
         headers: authHeaders(sellerSession),
         body: JSON.stringify({
