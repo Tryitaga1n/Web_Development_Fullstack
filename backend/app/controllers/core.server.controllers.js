@@ -44,6 +44,9 @@ const addBid = asyncHandler(async (req, res) => {
     const item = await core.getItemDetails(itemId);
     if (!item) return res.sendStatus(404);
     if (item.creator_id === req.user.user_id) return res.sendStatus(403);
+    if (Number(item.end_date) <= Date.now()) {
+        return res.status(400).json({ error_message: 'Auction has closed' });
+    }
 
     if (value.amount <= item.current_bid) {
         return res.status(400).json({ error_message: 'Bid must be greater than the current bid' });
