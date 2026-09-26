@@ -1,9 +1,9 @@
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import api, { apiErrorMessage } from '../services/api';
 import { useToastStore } from '../stores/toast';
-import { deleteDraft, getDraft, saveDraft } from '../utils/drafts';
+import { deleteDraft, getDraft, getDrafts, saveDraft } from '../utils/drafts';
 import { toDateTimeLocal } from '../utils/format';
 
 const route = useRoute();
@@ -24,6 +24,7 @@ const publishing = ref(false);
 const error = ref('');
 const draftId = ref(String(route.query.draft || ''));
 const savedAt = ref('');
+const savedDrafts = ref([]);
 
 const isEditingDraft = computed(() => Boolean(draftId.value));
 const endDatePreview = computed(() => {
@@ -31,14 +32,33 @@ const endDatePreview = computed(() => {
     return Number.isFinite(value) ? value : 0;
 });
 
-const loadDraft = () => {
-    if (!draftId.value) return;
-    const draft = getDraft(draftId.value);
+const refreshDrafts = () => {
+    savedDrafts.value = getDrafts();
+};
+
+const resetForm = () => {
+    Object.assign(form, {
+        name: '',
+        description: '',
+        starting_bid: '',
+        end_date: toDateTimeLocal(defaultEnd()),
+        category_ids: []
+    });
+    draftId.value = '';
+    savedAt.value = '';
+};
+
+const loadDraft = (id = draftId.value) => {
+    if (!id) return;
+
+    const draft = getDraft(String(id));
     if (!draft) {
         toast.push('That draft could not be found.', 'error');
         router.replace('/create');
         return;
     }
+
+    draftId.value = String(id);
     Object.assign(form, {
         name: draft.name || '',
         description: draft.description || '',
@@ -48,6 +68,33 @@ const loadDraft = () => {
     });
     savedAt.value = draft.updatedAt || '';
 };
+
+const openDraft = (id) => {
+    router.replace({ query: { draft: id } });
+    loadDraft(id);
+};
+
+const deleteInlineDraft = (draft) => {
+    if (!window.confirm(`Delete the draft "${draft.name || 'Untitled item'}"?`)) return;
+
+    deleteDraft(draft.id);
+    refreshDrafts();
+
+    if (draft.id === draftId.value) {
+        resetForm();
+        router.replace('/create');
+        toast.push('Draft deleted and form reset.', 'info');
+    } else {
+        toast.push('Draft deleted.', 'info');
+    }
+};
+
+watch(() => route.query.draft, (id) => {
+    const nextId = String(id || '');
+    if (nextId === draftId.value) return;
+    if (nextId) loadDraft(nextId);
+    else resetForm();
+});
 
 const payload = () => ({
     name: form.name.trim(),
@@ -65,6 +112,7 @@ const saveCurrentDraft = (quiet = false) => {
     });
     draftId.value = saved.id;
     savedAt.value = saved.updatedAt;
+    refreshDrafts();
     router.replace({ query: { draft: saved.id } });
     if (!quiet) toast.push('Draft saved in this browser.', 'success');
 };
@@ -90,6 +138,7 @@ const publish = async () => {
     try {
         const { data: created } = await api.post('/item', data);
         if (draftId.value) deleteDraft(draftId.value);
+        refreshDrafts();
         toast.push('Your auction is now live.', 'success');
         router.push(`/item/${created.item_id}`);
     } catch (err) {
@@ -101,6 +150,7 @@ const publish = async () => {
 
 onMounted(async () => {
     loadDraft();
+    refreshDrafts();
     try {
         const { data } = await api.get('/categories');
         categories.value = data;
@@ -118,11 +168,14 @@ onMounted(async () => {
             <div class="row align-items-end g-3">
                 <div class="col-lg-8">
                     <p class="eyebrow text-accent mb-2">Seller studio</p>
-                    <h1 class="display-5 fw-bold text-white mb-2">{{ isEditingDraft ? 'Edit your draft' : 'List a new item' }}</h1>
-                    <p class="text-white-50 mb-0">Write the story, set the opening bid and choose when the needle drops.</p>
+                    <h1 class="display-5 fw-bold mb-2">{{ isEditingDraft ? 'Edit your draft' : 'List a new item' }}</h1>
+                    <p class="text-secondary mb-0">Add the details, set the opening bid and choose when bidding ends.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <RouterLink class="btn btn-outline-light" to="/drafts"><i class="bi bi-archive me-2"></i>View saved drafts</RouterLink>
+                    <a class="btn btn-outline-dark" href="#saved-drafts">
+                        <i class="bi bi-archive me-2"></i>Saved drafts
+                        <span v-if="savedDrafts.length" class="badge rounded-pill text-bg-light ms-1">{{ savedDrafts.length }}</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -204,7 +257,7 @@ onMounted(async () => {
             </div>
 
             <aside class="col-lg-4">
-                <div class="preview-card sticky-lg-top">
+                <div class="preview-card">
                     <p class="eyebrow text-accent mb-2">Live preview</p>
                     <h2 class="h3">{{ form.name || 'Untitled item' }}</h2>
                     <div class="preview-visual my-4">
@@ -221,6 +274,38 @@ onMounted(async () => {
                         <strong v-else>Not set</strong>
                     </div>
                 </div>
+
+                <section id="saved-drafts" class="draft-inline-panel mt-4">
+                    <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                        <div>
+                            <p class="eyebrow text-accent mb-1">Saved drafts</p>
+                            <h2 class="h4 mb-0">Continue a listing</h2>
+                        </div>
+                        <span class="badge rounded-pill text-bg-light">{{ savedDrafts.length }}</span>
+                    </div>
+                    <p class="small text-secondary">Drafts are stored only in this browser until you publish them.</p>
+
+                    <div v-if="!savedDrafts.length" class="draft-inline-empty">
+                        <i class="bi bi-archive" aria-hidden="true"></i>
+                        <p class="mb-0">No saved drafts yet.</p>
+                    </div>
+
+                    <ul v-else class="draft-inline-list list-unstyled mb-0">
+                        <li v-for="draft in savedDrafts" :key="draft.id" :class="{ active: draft.id === draftId }">
+                            <button class="draft-inline-open" type="button" @click="openDraft(draft.id)">
+                                <strong>{{ draft.name || 'Untitled item' }}</strong>
+                                <span>Updated {{ new Date(draft.updatedAt).toLocaleString() }}</span>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" type="button" :aria-label="`Delete ${draft.name || 'Untitled item'}`" @click="deleteInlineDraft(draft)">
+                                <i class="bi bi-trash3" aria-hidden="true"></i>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <RouterLink v-if="savedDrafts.length" class="btn btn-sm btn-outline-dark mt-3" to="/drafts">
+                        Open full drafts page
+                    </RouterLink>
+                </section>
             </aside>
         </div>
     </section>

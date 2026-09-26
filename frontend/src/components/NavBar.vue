@@ -72,22 +72,21 @@ onUnmounted(() => {
                         <RouterLink class="nav-link" :class="{ active: route.name === 'search' }" to="/search" @click="closeMenu">Browse</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink class="nav-link" :class="{ active: route.name === 'create-item' }" to="/create" @click="closeMenu">Sell an item</RouterLink>
+                        <RouterLink class="nav-link" :class="{ active: route.name === 'create-item' }" to="/create" @click="closeMenu">Create auction</RouterLink>
                     </li>
                     <template v-if="auth.isAuthenticated">
-                        <li class="nav-item">
-                            <RouterLink class="nav-link position-relative" :class="{ active: route.name === 'drafts' }" to="/drafts" @click="closeMenu">
-                                Drafts
-                                <span v-if="draftCount" class="badge rounded-pill text-bg-light ms-1">{{ draftCount }}</span>
-                            </RouterLink>
-                        </li>
                         <li class="nav-item dropdown">
                             <button class="nav-link dropdown-toggle btn btn-link" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle me-1" aria-hidden="true"></i>{{ displayName }}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow">
                                 <li><RouterLink class="dropdown-item" :to="profileLink" @click="closeMenu">My profile</RouterLink></li>
-                                <li><RouterLink class="dropdown-item" to="/create" @click="closeMenu">Create auction</RouterLink></li>
+                                <li>
+                                    <RouterLink class="dropdown-item d-flex justify-content-between align-items-center" :class="{ active: route.name === 'drafts' }" to="/drafts" @click="closeMenu">
+                                        <span>Drafts</span>
+                                        <span v-if="draftCount" class="badge rounded-pill text-bg-light">{{ draftCount }}</span>
+                                    </RouterLink>
+                                </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><button class="dropdown-item text-danger" type="button" @click="logout">Log out</button></li>
                             </ul>

@@ -27,10 +27,10 @@ onMounted(load);
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3">
                 <div>
                     <p class="eyebrow text-accent mb-2">Local workspace</p>
-                    <h1 class="display-5 fw-bold text-white mb-2">Your saved drafts</h1>
-                    <p class="text-white-50 mb-0">These listings live only in this browser until you publish them.</p>
+                    <h1 class="display-5 fw-bold mb-2">Your saved drafts</h1>
+                    <p class="text-secondary mb-0">These listings live only in this browser until you publish them.</p>
                 </div>
-                <RouterLink class="btn btn-accent" to="/create"><i class="bi bi-plus-lg me-2"></i>New draft</RouterLink>
+                <RouterLink class="btn btn-accent" to="/create"><i class="bi bi-plus-lg me-2"></i>Create auction</RouterLink>
             </div>
         </div>
     </section>
